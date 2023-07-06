@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM mini project</title>
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      .title{
+        display: flex;
+        margin-bottom: 20px;
+      }
+      #colorfulyear{
+        transform: translate(10px,-7px);
+      }
+      h4{
+        margin-bottom: 50px;
+      }
+      .wrapper{
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      li{
+        padding: 10px;
+        margin-bottom: 3px;
+        list-style-type: none;
+      }
+      .currentDate{
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: aqua;
+        transform: translateY(-10px);
+      }
+
+    </style>
+    
+</head>
+<body>
+    <div class="wrapper">
+   <div class="title"><h2>Karan Niroula in year</h2> <h1 id="colorfulyear">2023</h1></div>
+    <a href="https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/21_Day_DOM/21_day_dom.md#exercise-level-3"><h4>30DaysOfJavaScript Challange</h4></a>
+    <div class="currentDate"></div>    
+    <ul>
+        <li>30DaysOfPython Challenge Done</li>
+        <li>30DaysOfJavaScript Challenge Ongoing</li>
+        <li>30DaysOfReact Challenge Coming</li>
+        <li>30DaysOfFullStack Challenge Coming</li>
+        <li>30DaysOfDataAnalysis Challenge Coming</li>
+        <li>30DaysOfReactNative Challenge Coming</li>
+        <li>30DaysOfMachineLearning Challenge Coming</li>
+    </ul>
+    </div>
+    <script>
+      let thisYear = document.getElementById("colorfulyear")
+      let allList = document.querySelectorAll(".wrapper li")
+      let dateContainer = document.querySelector(".currentDate")
+
+      let colorList = ["blue","yellow","green","pink","skyblue","grey","red","Aqua","Lavender","Coral","Sapphire","Goldenrod"]
+      let currentIndex = 0
+
+      function getCurrentDate(){
+        let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      let date = new Date()
+      let month= monthNames[date.getMonth()]
+      let din = date.getDate()
+      let year = date.getFullYear()
+      let hours= date.getHours()
+      let minutes = date.getMinutes();
+      let seconds = date.getSeconds();
+
+      let currentDate = `${month}/${din}/${year} ${hours}:${minutes}:${seconds}`
+
+      dateContainer.innerHTML= currentDate
+      
+    }
+
+
+       function displayColors(){
+        thisYear.style.color=colorList[currentIndex]
+        currentIndex=(currentIndex+1)%colorList.length  //by using %colorList.length, we are always getting the valid index to the colorList array.
+
+        dateContainer.style.backgroundColor=colorList[currentIndex]
+        currentIndex=(currentIndex+1)%colorList.length  //by using %colorList.length, we are always getting the valid index to the colorList array.
+       }
+
+
+       allList.forEach(currentList=>{
+
+if(currentList.textContent.includes("Coming")){
+currentList.style.backgroundColor="red"
+}
+else if(currentList.textContent.includes("Ongoing")){
+  currentList.style.backgroundColor="yellow"}
+else{
+  currentList.style.backgroundColor="green"
+}
+})
+
+getCurrentDate() //calling the function once, so the when the page reloads it won't have to wait 1 sec inorder to show the date
+
+       setInterval(displayColors,1000) //calls the function in every 1 second
+
+       setInterval(getCurrentDate,1000)
+
+    </script>
+</body>
+</html>
