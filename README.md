@@ -1,1 +1,0 @@
-# 30daysofJS-DOM-mini-project-
